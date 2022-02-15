@@ -1,0 +1,26 @@
+{
+  "name": "adasviewer",
+  "version": "1.0.0",
+  "description": "3D-Viewer for Autonomous Driving development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "browser-sync start --server --files 'src/css/*.css, **/*.html'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javijavier/ADASViewer.git"
+  },
+  "author": "Javier Gonzalez de Mendibil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javijavier/ADASViewer/issues"
+  },
+  "homepage": "https://github.com/javijavier/ADASViewer#readme",
+  "dependencies": {
+    "mapbox-gl": "^2.7.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.7"
+  }
+}
