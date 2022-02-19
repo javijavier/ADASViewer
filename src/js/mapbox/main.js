@@ -1,18 +1,26 @@
 import loadJSON from "../jsonLoader/main.js";
-import { map1, map2 } from "./init.js";
+import mqqtClient, { mqqtReceived } from "../mqtt/main.js";
 
-import { addObject, modelTransformJSON } from "../utils/main.js";
+import {map} from "./init.js";
+
+import { loadDataFromJSON } from "../utils/main.js";
+import { loadModels, addObject } from "./utils.js";
+import { getLocation } from "../location/main.js";
 
 const THREE = window.THREE;
 
 // configuration of the custom layer for a 3D model per the CustomLayerInterface
 
-var modelTransform;
-var modelList = new Array();
+var sceneData;
+var modelList = null;
+
+var client = mqqtClient();
 
 loadJSON.then((res) => {
-  modelTransform = modelTransformJSON(res);
+  sceneData = loadDataFromJSON(res);
 });
+
+getLocation();
 
 const customLayer = {
   id: "3d-model",
@@ -20,70 +28,21 @@ const customLayer = {
   renderingMode: "3d",
 
   onAdd: function (map, gl) {
-    for (let i = 0; i < 3; i++) {
-        
-      // use the three.js GLTF loader to add the 3D model to the three.js scene
-      const loader = new THREE.GLTFLoader();
-      loader.load("src/assets/Vehicle" +  i.toString() + ".gltf", (gltf) => {
-        modelList.push(addObject(map, gl, gltf));
-
-      });
-  
-    }
+    modelList = loadModels(map, gl);
   },
+
   render: function (gl, matrix) {
-    //updateCameraPosition(position, altitude, target);
-    for (var i = 0; i < modelTransform.length; i++) {
-      const rotationX = new THREE.Matrix4().makeRotationAxis(
-        new THREE.Vector3(1, 0, 0),
-        modelTransform[i].rotateX
-      );
-      const rotationY = new THREE.Matrix4().makeRotationAxis(
-        new THREE.Vector3(0, 1, 0),
-        modelTransform[i].rotateY
-      );
-      const rotationZ = new THREE.Matrix4().makeRotationAxis(
-        new THREE.Vector3(0, 0, 1),
-        modelTransform[i].rotateZ
-      );
+    client.publish("data", JSON.stringify(sceneData));
+    var mqttData = mqqtReceived();
 
-      const m = new THREE.Matrix4().fromArray(matrix);
-      const l = new THREE.Matrix4()
-        .makeTranslation(
-          modelTransform[i].translateX,
-          modelTransform[i].translateY,
-          modelTransform[i].translateZ
-        )
-        .scale(
-          new THREE.Vector3(
-            modelTransform[i].scale,
-            -modelTransform[i].scale,
-            modelTransform[i].scale
-          )
-        )
-        .multiply(rotationX)
-        .multiply(rotationY)
-        .multiply(rotationZ);
-      
-        console.log(modelList)
-
-      modelList[i].camera.projectionMatrix = m.multiply(l);
-      modelList[i].renderer.resetState();
-      modelList[i].renderer.render(modelList[i].scene, modelList[i].camera);
-      modelList[i].map.triggerRepaint();
+    if (mqttData) {
+      for (var i = 0; i < mqttData.length; i++) {
+        addObject(gl, matrix, mqttData[i].pose, modelList[mqttData[i].type]);
+      }
     }
   },
 };
 
-function updateCameraPosition(position, altitude, target) {
-  const camera = map1.getFreeCameraOptions();
-
-  camera.position = mapboxgl.MercatorCoordinate.fromLngLat(position, altitude);
-  camera.lookAtPoint(target);
-
-  map1.setFreeCameraOptions(camera);
-}
-
-map1.on("style.load", () => {
-  map1.addLayer(customLayer, "waterway-label");
+map.on("style.load", () => {
+  map.addLayer(customLayer, "waterway-label");
 });

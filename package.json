@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/javijavier/ADASViewer#readme",
   "dependencies": {
-    "mapbox-gl": "^2.7.0"
+    "mapbox-gl": "^2.7.0",
+    "maplibre-gl": "^2.1.6",
+    "mqtt": "^4.3.6"
   },
   "devDependencies": {
     "browser-sync": "^2.27.7"

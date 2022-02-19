@@ -14,17 +14,10 @@ body { margin: 0;
     font-size: 80px;
     color: #E5E9F0;
 }
-#map1 { 
+#map { 
     position: absolute; 
     top: 0; 
-    left: 30%;
+    left: 0%;
     bottom: 0; 
-    width: 70%; 
-}
-#map2 { 
-    position: absolute; 
-    top: 0; 
-    bottom: 0; 
-    left: 0;
-    width: 30%; 
+    width: 100%; 
 }
