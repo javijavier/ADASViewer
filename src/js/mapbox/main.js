@@ -1,7 +1,7 @@
 import loadJSON from "../jsonLoader/main.js";
 import mqqtClient, { mqqtReceived } from "../mqtt/main.js";
 
-import {map} from "./init.js";
+import { map } from "./init.js";
 
 import { loadDataFromJSON } from "../utils/main.js";
 import { loadModels, addObject } from "./utils.js";
@@ -21,6 +21,17 @@ loadJSON.then((res) => {
 });
 
 getLocation();
+
+
+map.addControl(
+
+  new MapboxDirections({
+    accessToken: mapboxgl.accessToken,
+    unit: 'metric',
+    language: 'es',
+  }),
+  'top-left'
+);
 
 const customLayer = {
   id: "3d-model",
@@ -43,6 +54,14 @@ const customLayer = {
   },
 };
 
+
 map.on("style.load", () => {
-  map.addLayer(customLayer, "waterway-label");
+
+  const layers = map.getStyle().layers;
+  const labelLayerId = layers.find(
+    (layer) => layer.type === "symbol" && layer.layout["text-field"]
+  ).id;
+  map.addLayer(customLayer, labelLayerId);
+
 });
+

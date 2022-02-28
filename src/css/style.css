@@ -17,7 +17,10 @@ body { margin: 0;
 #map { 
     position: absolute; 
     top: 0; 
-    left: 0%;
+    left: 00%;
     bottom: 0; 
     width: 100%; 
+}
+#side {
+    position: absolute; 
 }
