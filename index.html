@@ -14,17 +14,9 @@
         <a-assets>
             <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
         </a-assets>
-
-        <a-marker type='barcode' value='7'>
-            <a-box position='0 0.5 0' color="yellow"></a-box>
-        </a-marker>
+        
         <a-marker-camera type="pattern" url="./src/images/qr.patt">
-            <a-entity
-            gltf-model="#animated-asset"
-            scale="2">
-        </a-entity>
-
-
+            <a-box position='0 0.5 0' color="yellow"></a-box>
         </a-marker-camera>
 
         <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
