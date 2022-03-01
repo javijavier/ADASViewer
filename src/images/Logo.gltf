@@ -47,13 +47,13 @@
             "mesh" : 0,
             "name" : "Text",
             "rotation" : [
-                0.693899929523468,
+                0.7071068286895752,
                 0,
                 0,
-                0.7200714349746704
+                0.7071068286895752
             ],
             "translation" : [
-                -2.732219934463501,
+                -0.001669459044933319,
                 0,
                 0
             ]
@@ -70,7 +70,7 @@
                     0.18587501347064972,
                     1
                 ],
-                "metallicFactor" : 0.9632353186607361,
+                "metallicFactor" : 0.5073529481887817,
                 "roughnessFactor" : 0.5
             }
         }
@@ -95,29 +95,29 @@
         {
             "bufferView" : 0,
             "componentType" : 5126,
-            "count" : 14258,
+            "count" : 14268,
             "max" : [
-                5.042051792144775,
+                2.5160515308380127,
                 0.10000000149011612,
                 0.03905130550265312
             ],
             "min" : [
-                0.046000003814697266,
+                -2.4800002574920654,
                 -0.10000000149011612,
-                -0.7120000720024109
+                -0.7120000123977661
             ],
             "type" : "VEC3"
         },
         {
             "bufferView" : 1,
             "componentType" : 5126,
-            "count" : 14258,
+            "count" : 14268,
             "type" : "VEC3"
         },
         {
             "bufferView" : 2,
             "componentType" : 5126,
-            "count" : 14258,
+            "count" : 14268,
             "type" : "VEC2"
         },
         {
@@ -130,28 +130,28 @@
     "bufferViews" : [
         {
             "buffer" : 0,
-            "byteLength" : 171096,
+            "byteLength" : 171216,
             "byteOffset" : 0
         },
         {
             "buffer" : 0,
-            "byteLength" : 171096,
-            "byteOffset" : 171096
+            "byteLength" : 171216,
+            "byteOffset" : 171216
         },
         {
             "buffer" : 0,
-            "byteLength" : 114064,
-            "byteOffset" : 342192
+            "byteLength" : 114144,
+            "byteOffset" : 342432
         },
         {
             "buffer" : 0,
             "byteLength" : 121944,
-            "byteOffset" : 456256
+            "byteOffset" : 456576
         }
     ],
     "buffers" : [
         {
-            "byteLength" : 578200,
+            "byteLength" : 578520,
             "uri" : "Logo.bin"
         }
     ]
