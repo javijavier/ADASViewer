@@ -6,11 +6,13 @@
     <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
     <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
     <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-mapbox-component/dist/aframe-mapbox-component.min.js"></script>
+  
     <body style='margin : 0px; overflow: hidden;'>
         <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
         <a-scene embedded arjs='sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;'>
-
+      
         <a-assets>
             <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-playground/models/CesiumMan.gltf"></a-asset-item>
         </a-assets>
@@ -24,7 +26,18 @@
                 gltf-model="#animated-asset"
                 scale="2">
             </a-entity>
+            <a-entity
+            id="map"
+            geometry="primitive: plane; width: 1; height: 1;"
+            material="color: #ffffff; shader: flat; side: both; transparent: true;"
+            mapbox="center: 12, 47; zoom: 12;
+              accessToken: pk.eyJ1IjoiamF2aWphdmllciIsImEiOiJja3p1ZnBna2sxY3M1Mm9vaGZnNm93eTdhIn0.lpPjj0MxB9J4ALvRo8ZX9g;
+              style: mapbox://styles/javijavier/ckzok4qdm00kk14l8kepcsv6l;"
+            position="0 2 -2">
+        </a-entity>
         </a-marker>
+        <a-mapbox position="0 0 -5"></a-mapbox>
+        <a-camera></a-camera>
 
         <!-- use this <a-entity camera> to support multiple-markers, otherwise use <a-marker-camera> instead of </a-marker> -->
         <a-entity camera></a-entity>
